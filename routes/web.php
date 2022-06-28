@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DolilDetailsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,3 +21,14 @@ Route::get('/', function () {
 Route::post('/upload', function (Request $request) {
    dd($request->file('test'));
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//create update delete get trip
+Route::get('/dolil', [DolilDetailsController::class, 'index']);
+//Route::post('/dolil-store', [DolilDetailsController::class, 'store']);
+//Route::get('/trips/{id}', [DolilDetailsController::class, 'show']);
+//Route::put('/trips/{id}', [DolilDetailsController::class, 'update']);
+//Route::delete('/trips/{id}', [DolilDetailsController::class, 'destroy']);
