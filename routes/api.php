@@ -18,3 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/dolil-store', [DolilDetailsController::class, 'store']);
+Route::get('/search-dolil', [DolilDetailsController::class, 'search_dolil']);
+Route::put('/update/{id}', [DolilDetailsController::class, 'update']);
+Route::delete('/delete/{id}', [DolilDetailsController::class, 'destroy']);
