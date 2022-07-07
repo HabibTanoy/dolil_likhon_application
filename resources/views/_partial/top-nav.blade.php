@@ -72,9 +72,9 @@
                 <a href="#" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Profile
                 </a>
-                <a href="#" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
-                    Activities
-                </a>
+{{--                <a href="#" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>--}}
+{{--                    Activities--}}
+{{--                </a>--}}
                 <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
                     Settings
                 </a>

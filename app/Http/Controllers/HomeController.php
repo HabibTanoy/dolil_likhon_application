@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DolilInformation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+        $total_saved = DolilInformation::count();
+        $total_this_month = DolilInformation::where('created_at', '>=', Carbon::now()->startOfMonth()->toDateString())
+            ->where('created_at', '<=', Carbon::now()->endOfMonth()->toDateString())
+            ->count();
+        return view('frontend.index', compact('total_saved', 'total_this_month'));
     }
 }

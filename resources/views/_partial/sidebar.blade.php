@@ -2,7 +2,7 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="{{route('dashboard')}}"> <img alt="image" src="{{ asset('assets/img/logo.png') }}" class="header-logo" /> <span
-                    class="logo-name">{{ env("APP_NAME") }}</span>
+                    class="logo-name">SR Computers</span>
             </a>
         </div>
         <ul class="sidebar-menu">

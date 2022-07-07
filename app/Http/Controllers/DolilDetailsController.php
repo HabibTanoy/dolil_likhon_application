@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DolilInformation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -24,7 +25,7 @@ class DolilDetailsController extends Controller
                     })
                     ->addColumn('action', function ($dolil) {
                         return "<div class='row'>".
-                            "<a class='btn btn-info m-1' href='". route('dolil-edit', $dolil->id) ."'><i class='fas fa-eye'></i></a>".
+                            "<a class='btn btn-info m-1' href='". $dolil->google_link."'><i class='fas fa-eye'></i></a>".
                             "<a class='btn btn-primary m-1' href='". route('dolil-edit', $dolil->id) ."'><i class='fas fa-edit'></i></a>" .
                             "<a class='btn btn-danger m-1' href='". route('dolil-delete', $dolil->id) ."'><i class='fas fa-trash'></i></a>". "</div>";
                     })
@@ -82,6 +83,14 @@ class DolilDetailsController extends Controller
         $khotian = $request->khotian;
         $buyer = $request->buyer;
         $seller = $request->seller;
+        $file = $request->file('docs_file');
+//        dd($request->all(), $file);
+
+        $file_name = $file->getClientOriginalName();
+        Storage::disk("google")->putFileAs("", $file, $file_name);
+        $all_files = Storage::disk("google")->allFiles();
+        $first_file = $all_files[0];
+        $get_url = Storage::disk('google')->url($first_file);
 
         $dolil_store = DolilInformation::create([
             'name' => $name,
@@ -89,7 +98,8 @@ class DolilDetailsController extends Controller
             'mouja' => $mouja,
             'khotian' => $khotian,
             'buyer' => $buyer,
-            'seller' => $seller
+            'seller' => $seller,
+            'google_link' => $get_url
         ]);
 
         return redirect()->route('dolil-list');
@@ -131,6 +141,13 @@ class DolilDetailsController extends Controller
         $khotian = $request->khotian;
         $buyer = $request->buyer;
         $seller = $request->seller;
+        $file = $request->file('docs_file');
+
+        $file_name = $file->getClientOriginalName();
+        Storage::disk("google")->putFileAs("", $file, $file_name);
+        $all_files = Storage::disk("google")->allFiles();
+        $first_file = $all_files[0];
+        $get_url = Storage::disk('google')->url($first_file);
 
         $dolil_update = [
             'name' => $name,
@@ -138,7 +155,8 @@ class DolilDetailsController extends Controller
             'mouja' => $mouja,
             'khotian' => $khotian,
             'buyer' => $buyer,
-            'seller' => $seller
+            'seller' => $seller,
+            'google_link' => $get_url
         ];
         $dolil_update = DolilInformation::find($id)
             ->update($dolil_update);

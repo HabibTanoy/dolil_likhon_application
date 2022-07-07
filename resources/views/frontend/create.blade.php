@@ -50,9 +50,9 @@
                             Enter Seller
                         </div>
                     </div>
-                    <div class="section-title">Upload Excel</div>
+                    <div class="section-title">Upload Docs</div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
+                        <input type="file" class="custom-file-input" name="docs_file" id="customFile">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                 </div>
